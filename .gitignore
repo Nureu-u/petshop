@@ -1,0 +1,34 @@
+# ---- Ảnh người dùng upload (giữ lại thư mục bằng .gitkeep) ----
+uploads/pets/*
+uploads/products/*
+!uploads/pets/.gitkeep
+!uploads/products/.gitkeep
+
+# ---- Cấu hình riêng từng máy & bí mật (DB pass, VNPAY secret, SMTP...) ----
+config/config.local.php
+.env
+.env.*
+!.env.example
+
+# ---- File thử nghiệm, không đưa lên repo ----
+test.php
+test_db.php
+phpinfo.php
+
+# ---- Log, backup, file tạm ----
+*.log
+error_log
+*.bak
+*.tmp
+*.swp
+
+# ---- Gói nén, thư viện cài tự động ----
+*.zip
+/vendor/
+
+# ---- IDE / hệ điều hành ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
