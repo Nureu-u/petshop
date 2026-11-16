@@ -80,26 +80,26 @@ $totalAmount = $subtotal + $shippingFee;
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
                     <!-- Thanh toán khi nhận hàng (COD) -->
-                    <label class="flex items-start gap-3 p-4 rounded-xl border border-stoneWarm bg-cream/50 hover:border-coral cursor-pointer transition">
+                    <label class="flex items-start gap-3 p-4 rounded-xl border-2 border-coral bg-coral-light/40 cursor-pointer transition">
                         <input type="radio" name="payment_method" value="COD" checked class="mt-1 accent-coral">
                         <div>
                             <p class="font-extrabold text-espresso flex items-center gap-1.5">
                                 <i class="fa-solid fa-truck-fast text-amber-600"></i>
-                                <span>Tiền mặt (COD)</span>
+                                <span>Thanh toán khi nhận hàng (COD)</span>
                             </p>
-                            <p class="text-[11px] text-mutedBrown mt-1">Kiểm tra thú cưng và sản phẩm trước khi thanh toán khi nhận hàng.</p>
+                            <p class="text-[11px] text-mutedBrown mt-1">Kiểm tra sức khỏe thú cưng và sản phẩm trực tiếp trước khi thanh toán tiền mặt.</p>
                         </div>
                     </label>
 
-                    <!-- Chuyển khoản QR ngân hàng (SePay / VietinBank) -->
+                    <!-- Chuyển khoản QR VietinBank (SePay, tự động xác nhận) -->
                     <label class="flex items-start gap-3 p-4 rounded-xl border border-stoneWarm bg-cream/50 hover:border-coral cursor-pointer transition">
                         <input type="radio" name="payment_method" value="SEPAY" class="mt-1 accent-coral">
                         <div>
                             <p class="font-extrabold text-espresso flex items-center gap-1.5">
                                 <i class="fa-solid fa-qrcode text-emerald-600"></i>
-                                <span>Chuyển khoản QR</span>
+                                <span>Chuyển khoản QR (VietinBank)</span>
                             </p>
-                            <p class="text-[11px] text-mutedBrown mt-1">Quét mã VietQR ngân hàng, tự động xác nhận đơn hàng ngay khi nhận tiền.</p>
+                            <p class="text-[11px] text-mutedBrown mt-1">Quét mã VietQR (số tiền = tổng đơn) bằng app ngân hàng. Đơn chỉ được xác nhận khi ngân hàng báo có tiền thật vào tài khoản.</p>
                         </div>
                     </label>
                 </div>

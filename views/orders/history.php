@@ -63,7 +63,13 @@ $statusMeta = [
                         </div>
                         <div class="flex items-center gap-2">
                             <span class="px-2.5 py-1 rounded-full text-[11px] font-bold <?= ($ord['payment_status'] ?? '') === 'paid' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-stone-100 text-stone-700' ?>">
-                                <?= ($ord['payment_status'] ?? '') === 'paid' ? 'Đã thanh toán (' . e((string)$ord['payment_method']) . ')' : 'Chưa thu tiền (' . e((string)$ord['payment_method']) . ')' ?>
+                                <?php if (($ord['payment_status'] ?? '') === 'paid'): ?>
+                                    Đã nhận tiền (<?= e((string)$ord['payment_method']) ?>)
+                                <?php elseif (($ord['payment_method'] ?? '') === 'SEPAY' && !empty($ord['pay_url'])): ?>
+                                    Chờ chuyển khoản (SEPAY)
+                                <?php else: ?>
+                                    Chưa thu tiền (<?= e((string)$ord['payment_method']) ?>)
+                                <?php endif; ?>
                             </span>
                             <span class="px-3 py-1 rounded-full text-xs font-bold <?= $st['badge'] ?>">
                                 <?= $st['label'] ?>
@@ -110,8 +116,8 @@ $statusMeta = [
                             <span class="text-mutedBrown">Tổng thanh toán: <strong class="font-mono-code text-base text-coral"><?= e(format_price($ord['total_amount'])) ?></strong></span>
 
                             <?php if (!empty($ord['pay_url'])): ?>
-                                <!-- Thanh toán / Thanh toán lại cho đơn online đang chờ thanh toán -->
-                                <a href="<?= e((string)$ord['pay_url']) ?>" class="px-3.5 py-2 rounded-xl bg-coral hover:bg-coral-hover text-white font-bold shadow-sm transition">
+                                <!-- Đơn thanh toán online còn chờ: thanh toán / thanh toán lại -->
+                                <a href="<?= e((string)$ord['pay_url']) ?>" class="px-3.5 py-2 rounded-xl bg-coral hover:bg-coral-hover text-white font-bold transition no-underline">
                                     <i class="fa-solid fa-credit-card mr-1"></i> Thanh toán ngay
                                 </a>
                             <?php endif; ?>
