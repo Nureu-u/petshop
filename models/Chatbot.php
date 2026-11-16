@@ -92,7 +92,7 @@ final class Chatbot
     private static function defaultFaqs(): array
     {
         return [
-            ['Cửa hàng thanh toán bằng cách nào?', 'Khách thanh toán trực tuyến qua cổng VNPAY khi đặt hàng. Đơn chưa thanh toán sẽ ở trạng thái "Chờ thanh toán" cho đến khi thanh toán thành công.'],
+            ['Cửa hàng thanh toán bằng cách nào?', 'Cửa hàng có 2 cách thanh toán: tiền mặt khi nhận hàng (COD), hoặc chuyển khoản QR qua SePay khi đặt hàng. Đơn thanh toán QR chưa nhận được tiền sẽ ở trạng thái "Chờ thanh toán" cho đến khi hệ thống ghi nhận đã nhận tiền.'],
             ['Các trạng thái đơn hàng có ý nghĩa gì?', 'Chờ thanh toán: đơn đã tạo nhưng chưa thanh toán. Đã xác nhận: cửa hàng đã nhận đơn. Đang giao: đơn đang trên đường đến khách. Đã giao: khách đã nhận hàng. Đã hủy: đơn đã bị hủy, hàng và thú cưng được trả về kho.'],
             ['Tôi có thể hủy đơn hàng không?', 'Đơn đang ở trạng thái "Chờ thanh toán" hoặc "Đã xác nhận" có thể được hủy. Đơn đang giao hoặc đã giao thì không hủy được. Hãy liên hệ cửa hàng nếu bạn cần hỗ trợ thêm.'],
             ['Chính sách đổi trả như thế nào?', 'Nội dung mẫu: sản phẩm lỗi do nhà sản xuất hoặc giao sai hàng được hỗ trợ đổi trả. Với thú cưng, nếu có vấn đề sức khỏe khi nhận, khách liên hệ cửa hàng sớm để được hỗ trợ. Cửa hàng cập nhật chi tiết chính sách tại trang quản lý chatbot.'],
