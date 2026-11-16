@@ -81,6 +81,11 @@ final class Chatbot
                 self::faqSave(null, $q, $a, 'active', false);
             }
         }
+        // Tự động đồng bộ dữ liệu thú cưng, sản phẩm, bài viết vào kho tri thức ở lần chạy đầu tiên
+        $autoCount = (int) $pdo->query("SELECT COUNT(*) FROM chatbot_knowledge WHERE source_type <> 'faq'")->fetchColumn();
+        if ($autoCount === 0) {
+            self::reindex();
+        }
     }
 
     /** Noi dung mau. Cua hang tu cap nhat cho dung chinh sach that. */
@@ -425,7 +430,8 @@ final class Chatbot
         }
         $pdo = Database::pdo();
         $st = $pdo->prepare("SELECT o.id, o.order_code, o.status, o.total_amount, o.created_at,
-                (SELECT p.status FROM payments p WHERE p.order_id = o.id ORDER BY p.created_at DESC LIMIT 1) AS pay
+                (SELECT p.status FROM payments p WHERE p.order_id = o.id ORDER BY p.created_at DESC LIMIT 1) AS pay,
+                (SELECT p.payment_method FROM payments p WHERE p.order_id = o.id ORDER BY p.created_at DESC LIMIT 1) AS pay_method
             FROM orders o WHERE o.user_id = ? ORDER BY o.created_at DESC LIMIT 5");
         $st->execute([$user['id']]);
         $orders = $st->fetchAll();
@@ -439,7 +445,7 @@ final class Chatbot
             $names = array_map(fn($i) => $i['item_name'] . ' x' . $i['quantity'], $items->fetchAll());
             $lines[] = '- Mã đơn ' . $o['order_code'] . ', ngày ' . date('d/m/Y', strtotime((string) $o['created_at']))
                 . ', trạng thái: ' . (self::ORDER_STATUS[$o['status']] ?? $o['status'])
-                . ', thanh toán: ' . ($o['pay'] ? (self::PAY_STATUS[$o['pay']] ?? $o['pay']) : 'chưa có giao dịch')
+                . ', thanh toán: ' . ($o['pay'] ? ($o['pay_method'] ? $o['pay_method'] . ' - ' : '') . (self::PAY_STATUS[$o['pay']] ?? $o['pay']) : 'chưa có giao dịch')
                 . ', tổng: ' . format_price($o['total_amount'])
                 . ($names ? ', gồm: ' . implode('; ', $names) : '');
         }
