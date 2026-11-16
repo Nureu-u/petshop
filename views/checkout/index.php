@@ -71,14 +71,14 @@ $totalAmount = $subtotal + $shippingFee;
                 </div>
             </div>
 
-            <!-- 2. Chọn phương thức thanh toán (COD / VNPAY) -->
+            <!-- 2. Chọn phương thức thanh toán (COD / SEPAY) -->
             <div class="card-warm p-6 bg-white border border-stoneWarm rounded-2xl space-y-4">
                 <div class="flex items-center gap-2.5 border-b border-stoneWarm pb-3">
                     <span class="w-8 h-8 rounded-xl bg-coral-light text-coral flex items-center justify-center font-bold text-xs">2</span>
                     <h2 class="text-sm font-extrabold text-espresso uppercase tracking-wider">Phương thức thanh toán</h2>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 text-xs">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
                     <!-- Thanh toán khi nhận hàng (COD) -->
                     <label class="flex items-start gap-3 p-4 rounded-xl border border-stoneWarm bg-cream/50 hover:border-coral cursor-pointer transition">
                         <input type="radio" name="payment_method" value="COD" checked class="mt-1 accent-coral">
@@ -88,18 +88,6 @@ $totalAmount = $subtotal + $shippingFee;
                                 <span>Tiền mặt (COD)</span>
                             </p>
                             <p class="text-[11px] text-mutedBrown mt-1">Kiểm tra thú cưng và sản phẩm trước khi thanh toán khi nhận hàng.</p>
-                        </div>
-                    </label>
-
-                    <!-- Thanh toán trực tuyến VNPAY -->
-                    <label class="flex items-start gap-3 p-4 rounded-xl border border-stoneWarm bg-cream/50 hover:border-coral cursor-pointer transition">
-                        <input type="radio" name="payment_method" value="VNPAY" class="mt-1 accent-coral">
-                        <div>
-                            <p class="font-extrabold text-espresso flex items-center gap-1.5">
-                                <i class="fa-solid fa-credit-card text-coral"></i>
-                                <span>Cổng VNPAY</span>
-                            </p>
-                            <p class="text-[11px] text-mutedBrown mt-1">Thanh toán qua thẻ ATM nội địa, thẻ ngân hàng hoặc Ví VNPAY.</p>
                         </div>
                     </label>
 
