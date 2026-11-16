@@ -24,7 +24,7 @@
                     <li>Địa chỉ: TP. Hồ Chí Minh</li>
                     <li>Email: support@petshop.local</li>
                     <li>Hotline tư vấn: 1900 6868 (08:00 – 21:00)</li>
-                    <li>Thanh toán: COD & Cổng VNPAY</li>
+                    <li>Thanh toán: COD & Chuyển khoản QR (SePay)</li>
                 </ul>
             </div>
         </div>
