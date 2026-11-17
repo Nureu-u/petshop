@@ -21,6 +21,19 @@ $routes = [
     'products'               => ['ProductController', 'index'],
     'products/show'          => ['ProductController', 'show'],
 
+    // Giỏ hàng, đặt hàng, thanh toán (TV4)
+    'cart'                   => ['CartController', 'index'],
+    'cart/add'               => ['CartController', 'add'],
+    'cart/update'            => ['CartController', 'update'],
+    'cart/remove'            => ['CartController', 'remove'],
+    'checkout'               => ['CheckoutController', 'index'],
+    'checkout/coupon'        => ['CheckoutController', 'coupon'],
+    'order/create'           => ['OrderController', 'create'],
+    'order/cancel'           => ['OrderController', 'cancel'],
+    'orders'                 => ['OrderController', 'history'],
+    'payment/sepay_create'   => ['PaymentController', 'sepay_create'],
+    'payment/sepay_check'    => ['PaymentController', 'sepay_check'],
+
     // Quản trị thú cưng
     'admin/pets'             => ['PetController', 'adminIndex'],
     'admin/pets/form'        => ['PetController', 'form'],
