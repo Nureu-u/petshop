@@ -492,3 +492,12 @@ CREATE TABLE posts (
     ),
     CONSTRAINT chk_posts_status CHECK (status IN ('draft', 'published', 'hidden'))
 ) ENGINE=InnoDB;
+
+-- =========================================================
+-- 18. ID SEQUENCES
+-- =========================================================
+CREATE TABLE IF NOT EXISTS id_sequences (
+    prefix     VARCHAR(5) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+    last_value INT UNSIGNED NOT NULL DEFAULT 0,
+    PRIMARY KEY (prefix)
+) ENGINE=InnoDB;
