@@ -117,7 +117,7 @@
         <div class="card feature">
             <div class="ico"><?= ui_icon('truck', 26) ?></div>
             <h3>Thanh toán & Giao nhận an toàn</h3>
-            <p class="muted">Hỗ trợ thanh toán trực tuyến qua cổng VNPAY hoặc kiểm tra khi nhận hàng (COD) kèm hoàn kho tự động.</p>
+            <p class="muted">Hỗ trợ thanh toán chuyển khoản QR (SePay) hoặc kiểm tra khi nhận hàng (COD) kèm hoàn kho tự động.</p>
         </div>
         <div class="card feature">
             <div class="ico"><?= ui_icon('chat', 26) ?></div>
