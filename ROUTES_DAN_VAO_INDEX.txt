@@ -14,3 +14,4 @@ Dan cac dong nay vao mang $routes trong index.php (NGUOI GOP lam, TV4 khong sua 
     'payment/sepay_check'  => ['PaymentController', 'sepay_check'],
 
 Khi gop: XOA cac route VNPay cu (payment/vnpay_create, vnpay_return, vnpay_ipn, vnpay_mock, sepay_mock_pay).
+'payment/sepay_result'   => ['PaymentController', 'sepay_result'],

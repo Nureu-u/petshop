@@ -38,7 +38,7 @@ final class PaymentController
             redirect('orders');
         }
         if ($pay['status'] === 'PAID') {
-            redirect('orders');
+            redirect('payment/sepay_result', ['order_id' => $order['id']]);
         }
         if ($pay['status'] === 'FAILED') { // lần trước thất bại/hết hạn => tạo lần thanh toán mới
             $pay = Payment::find(Payment::createForOrder($order['id'], 'SEPAY', (int) $order['total_amount']));
@@ -57,9 +57,25 @@ final class PaymentController
             'expires_at' => strtotime((string) $pay['created_at']) + max(1, (int) config('order_hold_minutes', 30)) * 60,
             'check_url'  => url('payment/sepay_check', ['order_id' => $order['id']]),
             'orders_url' => url('orders'),
+            'result_url' => url('payment/sepay_result', ['order_id' => $order['id']]),
         ];
         $title = 'Chuyển khoản QR';
         view('payment/sepay_qr', compact('info', 'title'));
+    }
+
+    /** Trang kết quả sau khi SePay xác nhận đã nhận tiền. */
+    public function sepay_result(): void
+    {
+        Auth::requireLogin();
+        $uid   = (string) Auth::id();
+        $order = Order::find(input('order_id'), $uid);
+        if (!$order) {
+            abort(404, 'Không tìm thấy đơn hàng.');
+        }
+        $pay    = Payment::latestByOrder($order['id']);
+        $isPaid = $pay && $pay['status'] === 'PAID';
+        $title  = $isPaid ? 'Thanh toán thành công' : 'Kết quả thanh toán';
+        view('payment/sepay_result', compact('order', 'pay', 'isPaid', 'title'));
     }
 
     /** AJAX (GET): hỏi SePay xem tiền đã vào chưa. */

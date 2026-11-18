@@ -59,6 +59,7 @@ $o = $info['order'];
 (function () {
     var CHECK_URL = <?= json_encode($info['check_url']) ?>;
     var ORDERS_URL = <?= json_encode($info['orders_url']) ?>;
+    var RESULT_URL = <?= json_encode($info['result_url']) ?>;
     var EXPIRES_AT = <?= (int) $info['expires_at'] ?> * 1000;
     var statusEl = document.getElementById('payStatus');
     var countEl = document.getElementById('countdown');
@@ -85,11 +86,11 @@ $o = $info['order'];
                 if (d.status === 'paid') {
                     finished = true;
                     show('<i class="fa-solid fa-circle-check mr-1"></i> Đã nhận tiền! Đơn hàng đã được xác nhận. Đang chuyển trang...', 'text-emerald-600');
-                    setTimeout(function () { window.location.href = ORDERS_URL; }, 2000);
+                    setTimeout(function () { window.location.href = RESULT_URL; }, 1500);
                 } else if (d.status === 'cancelled') {
                     finished = true;
                     show('Đơn hàng đã hết hạn thanh toán hoặc đã bị hủy.', 'text-rose-600');
-                    setTimeout(function () { window.location.href = ORDERS_URL; }, 3000);
+                    setTimeout(function () { window.location.href = RESULT_URL; }, 2000);
                 } else if (d.status === 'short') {
                     show('<i class="fa-solid fa-triangle-exclamation mr-1"></i> ' + d.message, 'text-amber-600');
                 } else if (d.status === 'error' && d.message) {
