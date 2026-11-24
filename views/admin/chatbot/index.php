@@ -218,19 +218,30 @@ $modeClass = ['ai' => 'gr', 'fallback' => 'y', 'blocked' => 'gy'];
     </div>
 </form>
 
-<?php /* ----- KHOI 5: Lich su hoi dap gan day ----- */ ?>
+<?php /* ----- KHOI 5: Hoi dap gan day - moi khach la mot dong, bam vao de xem ca cuoc tro chuyen ----- */ ?>
 <div class="c">
     <h2><?= e(t('chatbot.log.title')) ?></h2>
     <table class="tb">
-        <thead><tr><th><?= e(t('chatbot.log.col.time')) ?></th><th><?= e(t('chatbot.log.col.user')) ?></th><th><?= e(t('chatbot.log.col.q')) ?></th><th><?= e(t('chatbot.log.col.a')) ?></th><th><?= e(t('chatbot.log.col.mode')) ?></th></tr></thead>
+        <thead><tr><th><?= e(t('chatbot.log.col.time')) ?></th><th><?= e(t('chatbot.log.col.user')) ?></th><th><?= e(t('chatbot.log.col.count')) ?></th><th><?= e(t('chatbot.log.col.conv')) ?></th></tr></thead>
         <tbody>
-        <?php foreach ($recent as $m): ?>
+        <?php foreach ($recent as $g): ?>
             <tr>
-                <td data-label="<?= e(t('chatbot.log.col.time')) ?>"><?= e($fmt($m['created_at'])) ?></td>
-                <td data-label="<?= e(t('chatbot.log.col.user')) ?>"><?php if (!empty($m['user_id'])): ?><a href="<?= e(url('admin/users/show', ['id' => $m['user_id']])) ?>"><b><?= e($m['user_id']) ?></b></a><?php else: ?><span class="hint"><?= e(t('chatbot.log.guest')) ?></span><?php endif; ?></td>
-                <td data-label="<?= e(t('chatbot.log.col.q')) ?>" style="max-width:260px"><?= e(mb_strimwidth($m['question'], 0, 100, '…')) ?></td>
-                <td data-label="<?= e(t('chatbot.log.col.a')) ?>" style="max-width:380px"><?= e(mb_strimwidth($m['answer'], 0, 140, '…')) ?></td>
-                <td data-label="<?= e(t('chatbot.log.col.mode')) ?>"><span class="p <?= e($modeClass[$m['mode']] ?? 'gy') ?>"><?= e(t($modeLabel[$m['mode']] ?? 'chatbot.test.mode.blocked')) ?></span></td>
+                <td data-label="<?= e(t('chatbot.log.col.time')) ?>"><?= e($fmt($g['last_at'])) ?></td>
+                <td data-label="<?= e(t('chatbot.log.col.user')) ?>"><?php if (!empty($g['user_id'])): ?><a href="<?= e(url('admin/users/show', ['id' => $g['user_id']])) ?>"><b><?= e($g['user_id']) ?></b></a><?php else: ?><span class="hint"><?= e(t('chatbot.log.guest')) ?> (<?= e(substr($g['key'], 0, 6)) ?>)</span><?php endif; ?></td>
+                <td data-label="<?= e(t('chatbot.log.col.count')) ?>"><?= (int) $g['count'] ?></td>
+                <td data-label="<?= e(t('chatbot.log.col.conv')) ?>" style="max-width:640px">
+                    <details>
+                        <summary style="cursor:pointer;font-weight:600"><?= e(t('chatbot.log.view')) ?> (<?= (int) $g['count'] ?>)</summary>
+                        <?php foreach ($g['messages'] as $m): ?>
+                            <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #e5ded3">
+                                <div class="hint"><?= e($fmt($m['created_at'])) ?></div>
+                                <div style="white-space:pre-wrap"><b><?= e(t('chatbot.log.you')) ?>:</b> <?= e($m['question']) ?></div>
+                                <div style="white-space:pre-wrap;margin-top:4px"><b><?= e(t('chatbot.log.bot')) ?>:</b> <?= e($m['answer']) ?>
+                                    <span class="p <?= e($modeClass[$m['mode']] ?? 'gy') ?>"><?= e(t($modeLabel[$m['mode']] ?? 'chatbot.test.mode.blocked')) ?></span></div>
+                            </div>
+                        <?php endforeach; ?>
+                    </details>
+                </td>
             </tr>
         <?php endforeach; ?>
         <?php if (!$recent): ?><tr><td colspan="4" class="hint"><?= e(t('chatbot.log.empty')) ?></td></tr><?php endif; ?>

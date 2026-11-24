@@ -22,7 +22,7 @@ final class AdminChatbotController
         Chatbot::ensureTables();
         $stats = Chatbot::stats();
         $faqs = Chatbot::faqs();
-        $recent = Chatbot::recent(15);
+        $recent = Chatbot::conversations(15);
         $aiOn = ChatbotGemini::enabled();
         $edit = null;
         $editId = (int) input('edit', '0');
